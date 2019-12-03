@@ -16,31 +16,31 @@ Data Files (see .gitignore file):
   washington.csv
 
 ### Functions
-get_filters()
-  Asks user to specify a city, month, and day to analyze.
-  Returns city, month, day
+__get_filters()__
+  * Asks user to specify a city, month, and day to analyze.
+  * Returns city, month, day
 
-load_data(city, month, day)
-  Loads data for the specified city and filters by month and day if applicable.
-  Returns Pandas DataFrame containing city data filtered by month and day
+__load_data(city, month, day)__
+  * Loads data for the specified city and filters by month and day if applicable.
+  * Returns Pandas DataFrame containing city data filtered by month and day
 
-view_raw_data(df, step, colwidth)
-  Display portions of raw data.
+__view_raw_data(df, step, colwidth)__
+  * Display portions of raw data.
 
-time_stats(df)
-  Displays statistics on the most frequent times of travel.
+__time_stats(df)__
+  * Displays statistics on the most frequent times of travel.
 
-station_stats(df)
-  Displays statistics on the most popular stations and trip.
+__station_stats(df)__
+  * Displays statistics on the most popular stations and trip.
 
-trip_duration_stats(df)
-  Displays statistics on the total and average trip duration.
+__trip_duration_stats(df)__
+  * Displays statistics on the total and average trip duration.
 
-user_stats(df)
-  Displays statistics on bikeshare users.
-  
-additional_stats(df)
-  Displays additional statistics.
+__user_stats(df)__
+  * Displays statistics on bikeshare users.
+
+__additional_stats(df)__
+  * Displays additional statistics.
 
 ### Credits
 The basis for this project is Udacity's Programming for Data Science Degree.
