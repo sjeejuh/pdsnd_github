@@ -53,7 +53,7 @@ def get_filters():
             print('\t<<<\n')
             break
         else:
-            print("\t!!! Invalid day, please select an option from {}\n".format(PERMISSIBLE_DAYS))  
+            print("\t!!! Invalid day, please select an option from {}\n".format(PERMISSIBLE_DAYS))
 
     print('-'*40)
     return city, month, day
@@ -76,14 +76,14 @@ def load_data(city, month, day):
     df = pd.read_csv(filename);
     print('\tRetrieved {} unformatted rows and with {} columns'.format(df.shape[0], df.shape[1]))
     print('\t<<<\n')
-    
+
     # convert the Start Time column to datetime
     df['Start Time'] = pd.to_datetime(df['Start Time'])
-    
+
     #Create new columns for filtering by month and day
     df['month'] =  df['Start Time'].dt.month
     df['day_of_week'] =  df['Start Time'].dt.weekday_name
-    
+
     #Filter by month (if necessary - no need to add 1, 'All' in zeroth position is sufficient)
     index = PERMISSIBLE_MONTHS.index(month.lower())
     if month.lower() != 'all':
@@ -98,7 +98,7 @@ def load_data(city, month, day):
         print('\tFiltering by day: ', day)
         df = df[df['day_of_week'] == day.title()]
         print('\t<<<\n')
-        
+
     #Create extra columns for subsequent analysis
     df['hour'] = df['Start Time'].dt.hour
     df['Route'] = df['Start Station'] + ' to ' + df['End Station']
@@ -111,16 +111,16 @@ def view_raw_data(df, step, colwidth):
     #   df:         Dataframe to inspect
     #   step:       Number of rows to show
     #   colwidth    Desired column width (attempt to show all columns)
-    
+
     pd.set_option('max_colwidth', colwidth)
-    for i in range(0, df.shape[0], step): 
+    for i in range(0, df.shape[0], step):
         print("\nRaw data in rows: {} to {}".format(i, i+step-1))
         print('-'*40)
         print(df[i:i+step])
         show_more_data = input('Would you like to see more data? (yes/ no)\n\t')
         if show_more_data.lower() != "yes":
             break
-        
+
 def time_stats(df):
     """Displays statistics on the most frequent times of travel."""
 
@@ -205,31 +205,36 @@ def user_stats(df):
     except:
         print("\n\t The column [Birth Year] does not exist, no information concerning this can be presented.")
 
-    
+
     print("\nThis took %s seconds." % (time.time() - start_time))
     print('-'*40)
-    
+
 def additional_stats(df):
     """Displays additional statistics."""
 
     print('\nDisplay Additional Statistics...\n')
     start_time = time.time()
-    
+
     print("Number of trips per: ",df.groupby('User Type')["Route"].count(),"\n")
     print("Mean trip duration per: ",df.groupby('User Type')['Trip Duration'].mean(),"\n")
-    
+
     print("The number of routes with the same start and end station: ", df[df['Start Station'] == df['End Station']]["Route"].count())
     popular_route = df[df['Start Station'] == df['End Station']]["Route"].mode()[0];
     print("The most popular trip of this type is: ", popular_route)
     print("\tThe maximum trip duration is", df[df["Route"] == popular_route]["Trip Duration"].max())
     print("\tThe mean trip duration is", df[df["Route"] == popular_route]["Trip Duration"].mean())
     print("\tThe minimum trip duration is", df[df["Route"] == popular_route]["Trip Duration"].min())
-    
+
     print("\nThis took %s seconds." % (time.time() - start_time))
     print('-'*40)
 
 
 def main():
+    """
+    Accept user interaction in loop.
+
+    Exit loop when user provides answer other than "yes"
+    """
     while True:
         city, month, day = get_filters()
         df = load_data(city, month, day)
