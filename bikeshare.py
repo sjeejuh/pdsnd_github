@@ -91,7 +91,7 @@ def load_data(city, month, day):
     #Filter by day (if necessary)
     if day.lower() != 'all':
         print('\n>>>')
-        print('\tFiltering by day: ', day)
+        print('\tFiltering by day: {}'.format(day))
         df = df[df['day_of_week'] == day.title()]
         print('\t<<<\n')
 
