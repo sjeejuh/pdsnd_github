@@ -20,15 +20,13 @@ def get_filters():
         (str) month - name of the month to filter by, or "all" to apply no month filter
         (str) day - name of the day of week to filter by, or "all" to apply no day filter
     """
-    print('Hello! Let\'s explore some US bikeshare data!')
-    print('Please enter the filter criteria:')
+    print('Hello! Let\'s explore some US bikeshare data! \nPlease enter the filter criteria:')
     # TO DO: get user input for city (chicago, new york city, washington). HINT: Use a while loop to handle invalid inputs
     while True:
         print('\n>>>')
         city = input('Please enter the name of the city to analyze (Chicago, New York City or Washington).\n\t')
         if city.lower() in CITY_DATA.keys():
-            print("\tBikeshare analysis will be performed for CITY: ", city.title())
-            print('\t<<<\n')
+            print("\tBikeshare analysis will be performed for CITY: {}\t<<<\n".format(city.title()))
             break
         else:
             print("\t!!! Invalid city name, please select option from {}\n".format(CITY_DATA.keys()))
@@ -38,8 +36,7 @@ def get_filters():
         print('\n>>>')
         month = input('Please enter the name of the month to analyze (All, January, February, ... , June).\n\t')
         if month.lower() in PERMISSIBLE_MONTHS:
-            print("\tBikeshare analysis will be performed for MONTH: ", month.title())
-            print('\t<<<\n')
+            print("\tBikeshare analysis will be performed for MONTH: {}\t<<<\n".format(month.title()))
             break
         else:
             print("\t!!! Invalid month, please select an option from {}\n".format(PERMISSIBLE_MONTHS))
@@ -49,8 +46,7 @@ def get_filters():
         print('\n>>>')
         day = input('Please enter the name of the day to analyze (All, Monday, Tuesday, ... , Sunday).\n\t')
         if day.lower() in PERMISSIBLE_DAYS:
-            print("\tBikeshare analysis will be performed for DAY: ", day.title())
-            print('\t<<<\n')
+            print("\tBikeshare analysis will be performed for DAY: {}\t<<<\n".format(day.title()))
             break
         else:
             print("\t!!! Invalid day, please select an option from {}\n".format(PERMISSIBLE_DAYS))
